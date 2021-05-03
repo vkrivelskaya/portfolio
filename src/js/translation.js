@@ -21,7 +21,7 @@ export const translation = {
     },
     'Raindrops': {
         en: 'Raindrops',
-        ru: 'Raindrops'
+        ru: 'Капли дождя'
     },
     'Raindrops is a mathematical simulator': {
         en: 'Raindrops is a mathematical simulator, which you can use to improve the skills of arithmetic operations including addition, subtraction, multiplication, and division.',
@@ -29,7 +29,7 @@ export const translation = {
     },
     'Fancy weather': {
         en: 'Fancy weather',
-        ru: 'Fancy weather'
+        ru: 'Необычная погода'
     },
     'Fancy weather is a weather forecast application.': {
         en: 'Fancy weather is a weather forecast application.',
@@ -38,5 +38,25 @@ export const translation = {
     'UpSkill Lab': {
         en: 'UpSkill Lab/JavaScript Frontend Course',
         ru: 'Лаборатория UpSkill/Курс JavaScript Frontend'
-    }
+    },
+    'Calculator': {
+        en: 'Calculator',
+        ru: 'Калькулятор'
+    },
+    'This project is the calculator app': {
+        en: 'This project is the calculator app',
+        ru: 'Этот проект представляет собой приложение-калькулятор'
+    },
+    'Whack a mole': {
+        en: 'Whack a mole',
+        ru: 'Ударь крота'
+    },
+    'Whack a mole is a reaction speed game': {
+        en: 'Whack a mole is a reaction speed game in which you have to click on targets and earn points',
+        ru: 'Ударь крота - игра на скорость реакции, в которой вы должны нажимать на цели и зарабатывать очки'
+    },
+    'Singolo': {
+        en: 'Singolo',
+        ru: 'Синголо'
+    },
 };
