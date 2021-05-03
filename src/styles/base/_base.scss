@@ -1,0 +1,20 @@
+body {
+    font-size: 10px;
+    font-family: 'Josefin Sans', sans-serif;
+    background: url("../assets/images/background.jpg") no-repeat;
+    background-size: cover;
+
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.wrapper {
+    padding: 40px 40px 0px 40px;
+    border: 1px $black;
+
+    @include media-big-mobile {
+        padding: 40px 20px 0px 20px;
+    }
+}

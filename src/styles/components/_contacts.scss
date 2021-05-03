@@ -1,0 +1,54 @@
+.footer {
+    background-color: $desaturated-dark-red;
+}
+
+.contacts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact {
+    height: 30px;
+    width: 30px;
+    margin: 20px 30px;
+
+    &:hover {
+        cursor: pointer;
+        filter: invert(100%) sepia(88%) saturate(0%) hue-rotate(189deg)
+          brightness(114%) contrast(101%);
+        transition: all 0.3s ease-in-out;
+    }
+
+    & a {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    @include media-mobile {
+        height: 20px;
+        width: 20px;
+        margin: 20px;
+    }
+}
+
+.mail {
+    background: url("../assets/images/email.svg") no-repeat;
+    background-size: contain;
+}
+
+.phone {
+    background: url("../assets/images/phone-call.svg") no-repeat;
+    background-size: contain;
+}
+
+.skype {
+    background: url("../assets/images/skype.svg") no-repeat;
+    background-size: contain;
+}
+
+.telegram {
+    background: url("../assets/images/paper-plane.svg") no-repeat;
+    background-size: contain;
+}

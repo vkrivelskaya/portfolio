@@ -1,0 +1,381 @@
+.projects {
+    border: 1px $black;
+    padding: 5px;
+}
+
+.projects-container {
+    display: flex;
+    flex-direction: column;
+
+    @include media-desktop {
+        align-items: center;
+    }
+}
+
+.project {
+    width: 50%;
+    height: auto;
+    margin: 20px 10px;
+    border: 15px solid $grayish-red;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    box-shadow: -2px -2px 5px  $light-grayish-red,
+                3px 3px 5px rgba(0, 0, 0, 0.1);
+    cursor: default;
+
+    @include media-desktop {
+        border: 30px solid $grayish-red;
+        width: 100%;
+    }
+
+    @include media-tablet {
+        border: 20px solid $grayish-red;
+    }
+
+    @include media-big-mobile {
+        border: 15px solid $grayish-red;
+    }
+
+    .mask, .content {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0
+    }
+
+    &:hover {
+
+        .mask {
+            opacity:1;
+            transition-delay: 0s;
+        }
+
+        .project-heading {
+            opacity: 1;
+            transform: scale(1);
+            transition-delay: 0.1s;
+        }
+
+        .image {
+            transition-delay: 0s;
+        }
+
+        .project-description {
+            opacity: 1;
+            transform: scale(1);
+            transition-delay: 0.2s;
+        }
+
+        .link {
+            opacity:1;
+            transform: translateY(0px);
+            transition-delay: 0.3s;
+        }
+
+        .technologies {
+            opacity: 1;
+            transform: scale(1);
+            transition-delay: 0.2s;
+        }
+    }
+}
+
+.project .image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+    transition: all 0.4s ease-in-out 0.5s;
+}
+
+.project .project-heading {
+    text-transform: uppercase;
+    color: $white;
+    text-align: center;
+    position: relative;
+    font-size: 2rem;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    background: transparent;
+    margin: 20px 40px 0px 40px;
+    transform: scale(10);
+    transition: all 0.3s ease-in-out 0.1s;
+
+    @include media-desktop {
+        font-size: 2.5rem;
+    }
+
+    @include media-big-mobile {
+        font-size: 1.1rem;
+        margin: 10px 40px 0px 40px;
+    }
+
+    @include media-mobile {
+        font-size: 0.9rem;
+    }
+
+    @include media-small-mobile {
+        font-size: 0.6rem;
+        padding: 5px 10px;
+    }
+}
+
+.project .project-description {
+    font-style: italic;
+    font-size: 1.3rem;
+    position: relative;
+    color: $white;
+    font-weight: bold;
+    padding: 10px 10px 5px 10px;
+    text-align: center;
+    opacity:0;
+    transform: scale(10);
+	transition: all 0.3s ease-in-out 0.2s;
+    margin: 0;
+    display: block;
+
+    @include media-desktop {
+        font-size: 1.9rem;
+    }
+
+    @include media-tablet {
+        font-size: 1.5rem;
+    }
+
+    @include media-big-mobile {
+        font-size: 0.7rem;
+    }
+
+    @include media-mobile {
+        font-size: 0.6rem;
+    }
+
+    @include media-small-mobile {
+        font-size: 0.5rem;
+        padding: 5px 10px 5px 10px;
+    }
+}
+
+.technologies {
+    font-style: italic;
+    font-size: 1.2rem;
+    position: relative;
+    color: $white;
+    padding: 5px;
+    text-align: center;
+    opacity:0;
+    transform: scale(10);
+	transition: all 0.3s ease-in-out 0.2s;
+    margin: 10px 0;
+    display: block;
+
+    @include media-desktop {
+        font-size: 1.7rem;
+    }
+
+    @include media-big-mobile {
+        font-size: 0.8rem;
+        margin: 5px 0;
+    }
+
+    @include media-mobile {
+        font-size: 0.7rem;
+        margin: 2px 0 5px;
+    }
+
+    @include media-small-mobile {
+        font-size: 0.6rem;
+        margin: 0 0 5px;
+    }
+}
+
+.link {
+    text-decoration: none;
+    padding: 5px 10px;
+    background: $black;
+    color: $white;
+    text-transform: uppercase;
+    box-shadow: 0 0 1px $black;
+    opacity:0;
+    transform: translateY(100px);
+	transition: all 0.3s ease-in-out 0.1s;
+    font-size: 1.1rem;
+
+    &:hover {
+        box-shadow: 0 0 5px $black;
+    }
+
+    @include media-desktop {
+        font-size: 1.3rem;
+        padding: 15px 20px;
+    }
+
+    @include media-big-mobile {
+        font-size: 0.6rem;
+        padding: 5px 10px;
+    }
+
+    @include media-mobile {
+        font-size: 0.4rem;
+    }
+
+    @include media-small-mobile {
+        font-size: 0.3rem;
+    }
+}
+
+.project .mask {
+	background-color: $mostly-desaturated-dark-red;
+	opacity: 0;
+	transition: all 0.3s ease-in 0.4s;
+}
+
+.links-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10px;
+}
+
+.raindrops-project {
+    align-self: flex-end;
+
+    @include media-desktop {
+        align-self: center;
+    }
+}
+
+.checkbox-icons-container {
+    margin: 20px auto;
+    width: fit-content;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background: $mostly-desaturated-dark-red;
+    box-shadow: -2px -2px 5px  $light-grayish-red,
+                3px 3px 5px rgba(0, 0, 0, 0.1);
+
+
+    & li {
+        position: relative;
+        list-style: none;
+        text-align: center;
+        margin: 15px;
+
+        & label {
+            position: relative;
+            cursor: pointer;
+
+            & input[type="checkbox"] {
+                position: absolute;
+                opacity: 0;
+            }
+
+            & :checked ~ .icon-box {
+                box-shadow: inset -2px -2px 5px#e1d2ce,
+                    inset 3px 3px 5px rgba(0, 0, 0, 0.4);
+
+                & .icon {
+                    transform: scale(0.95);
+                }
+            }
+
+            & .icon-box {
+                width: 60px;
+                height: 60px;
+                background: $mostly-desaturated-dark-red;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-shadow: -3px -2px 8px  $light-grayish-red, 8px 8px 8px rgba(0, 0, 0, 0.4);
+                border-radius: 10px;
+
+                @include media-tablet {
+                    width: 50px;
+                    height: 50px;
+                }
+
+                @include media-big-mobile {
+                    width: 40px;
+                    height: 40px;
+                }
+
+                @include media-small-mobile {
+                    width: 30px;
+                    height: 30px;
+                }
+
+                & .icon {
+                    font-size: 1.6rem;
+                    color: $white;
+                    width: 40px;
+                    height: 40px;
+
+                    @include media-tablet {
+                        width: 30px;
+                        height: 30px;
+                        font-size: 1.2rem;
+                    }
+
+                    @include media-big-mobile {
+                        width: 25px;
+                        height: 25px;
+                        font-size: 0.9rem;
+                    }
+
+                    @include media-small-mobile {
+                        width: 20px;
+                        height: 20px;
+                        font-size: 0.6rem;
+                    }
+                }
+            }
+        }
+
+        @include media-big-mobile {
+            margin: 10px;
+        }
+
+        @include media-small-mobile {
+            margin: 8px;
+        }
+    }
+
+    @include media-big-mobile {
+        padding: 5px 10px;
+    }
+}
+
+.webpack-icon {
+    background: url("../assets/images/webpack.png") no-repeat;
+    background-size: contain;
+}
+
+.js-icon {
+    background: url("../assets/images/js.png") no-repeat;
+    background-size: contain;
+}
+
+.sass-icon {
+    background: url("../assets/images/sass.png") no-repeat;
+    background-size: contain;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
