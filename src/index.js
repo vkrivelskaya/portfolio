@@ -14,7 +14,7 @@ const selectors = {
 };
 
 let technologiesMap = {};
-let projectsSet = new Set();
+const projectsSet = new Set();
 
 function initTechnologiesMap() {
     const technologies = document.querySelectorAll(selectors.TECHNOLOGIES);
@@ -22,7 +22,7 @@ function initTechnologiesMap() {
     technologies.forEach((el) => {
         const project = el.closest(selectors.PROJECT);
         el.innerText.split(', ').forEach((tech) => {
-            if (technologiesMap[tech] === undefined) {
+            if (!technologiesMap[tech]) {
                 technologiesMap[tech] = new Set();
             }
             technologiesMap[tech].add(project);
@@ -41,11 +41,11 @@ function translateContent(e) {
 
 function intersection(setA, setB) {
     let intersection = new Set();
-    for (let elem of setB) {
+    setB.forEach((elem) => {
         if (setA.has(elem)) {
             intersection.add(elem);
         }
-    }
+    });
     return intersection;
 }
 
@@ -53,16 +53,12 @@ function refreshFilteredProjects() {
     const checkedTechnologiesButtons = document.querySelectorAll(selectors.INPUT_CHECKED);
     let projectsToShow = projectsSet;
 
-    checkedTechnologiesButtons.forEach((el) => {
-        projectsToShow = intersection(projectsToShow, technologiesMap[el.id]);
-    });
-
+    projectsToShow = Array
+        .from(checkedTechnologiesButtons)
+        .reduce((acc, el) => intersection(acc, technologiesMap[el.id]), projectsSet);
+   
     projectsSet.forEach((el) => {
-        if (projectsToShow.has(el)) {
-            el.style.display = 'block';
-        } else {
-            el.style.display = 'none';
-        }
+            el.style.display = projectsToShow.has(el) ? 'block' : 'none';
     });
     AOS.refresh();
 }
@@ -86,7 +82,7 @@ function showAllProjects() {
 function init() {
     const languageButtonElement = document.querySelector(selectors.LANGUAGE_BTN);
     const technologiesIconsContainerElement = document.querySelector(selectors.ICONS_CONTAINER);
-    const allTechnologiesButton = document.querySelector(selectors.ALL_TECHNOLOGIES_BTN);
+    const allTechnologiesButtonElement = document.querySelector(selectors.ALL_TECHNOLOGIES_BTN);
 
     initTechnologiesMap();
     initProjectsSet();
@@ -98,7 +94,7 @@ function init() {
     });
     languageButtonElement.addEventListener('input', translateContent);
     technologiesIconsContainerElement.addEventListener('input', refreshFilteredProjects);
-    allTechnologiesButton.addEventListener('click', showAllProjects);
+    allTechnologiesButtonElement.addEventListener('click', showAllProjects);
 }
 
 init();
