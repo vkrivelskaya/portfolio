@@ -3,24 +3,30 @@ import { translation } from './js/translation';
 import AOS from 'aos';
 import anime from 'animejs/lib/anime.es.js';
 
-const selectors = {
-    LANGUAGE_BTN: '.language-container',
-    ICONS_CONTAINER: '.checkbox-icons-container',
-    PROJECT: '.project',
-    TECHNOLOGIES: '.technologies',
-    ALL_TECHNOLOGIES_BTN: '#all-technologies',
-    ICON_BOX: '.icon-box',
-    INPUT_CHECKED: 'input[type="checkbox"]:checked',
+const classes = {
+    LANGUAGE_BTN: 'language-container',
+    ICONS_CONTAINER: 'checkbox-icons-container',
+    PROJECT: 'project',
+    TECHNOLOGIES: 'technologies',
+    ICON_BOX: 'icon-box',
 };
 
-let technologiesMap = {};
+const id = {
+    ALL_TECHNOLOGIES_BTN: 'all-technologies',
+};
+
+const tags = {
+    INPUT: 'input',
+};
+
+const technologiesMap = {};
 const projectsSet = new Set();
 
 function initTechnologiesMap() {
-    const technologies = document.querySelectorAll(selectors.TECHNOLOGIES);
+    const technologies = document.querySelectorAll(`.${classes.TECHNOLOGIES}`);
 
     technologies.forEach((el) => {
-        const project = el.closest(selectors.PROJECT);
+        const project = el.closest(`.${classes.PROJECT}`);
         el.innerText.split(', ').forEach((tech) => {
             if (!technologiesMap[tech]) {
                 technologiesMap[tech] = new Set();
@@ -39,24 +45,22 @@ function translateContent(e) {
     });
 }
 
-function intersection(setA, setB) {
-    let intersection = new Set();
+function findIntersection(setA, setB) {
+    const intersectionSet = new Set();
     setB.forEach((elem) => {
         if (setA.has(elem)) {
-            intersection.add(elem);
+            intersectionSet.add(elem);
         }
     });
-    return intersection;
+    return intersectionSet;
 }
 
 function refreshFilteredProjects() {
-    const checkedTechnologiesButtons = document.querySelectorAll(selectors.INPUT_CHECKED);
-    let projectsToShow = projectsSet;
-
-    projectsToShow = Array
+    const checkedTechnologiesButtons = document.querySelectorAll(`${tags.INPUT}[type="checkbox"]:checked`);
+    let projectsToShow = Array
         .from(checkedTechnologiesButtons)
-        .reduce((acc, el) => intersection(acc, technologiesMap[el.id]), projectsSet);
-   
+        .reduce((acc, el) => findIntersection(acc, technologiesMap[el.id]), projectsSet);
+
     projectsSet.forEach((el) => {
             el.style.display = projectsToShow.has(el) ? 'block' : 'none';
     });
@@ -64,7 +68,7 @@ function refreshFilteredProjects() {
 }
 
 function initProjectsSet() {
-    const projects = document.querySelectorAll(selectors.PROJECT);
+    const projects = document.querySelectorAll(`.${classes.PROJECT}`);
 
     projects.forEach((el) => {
         projectsSet.add(el);
@@ -72,29 +76,33 @@ function initProjectsSet() {
 }
 
 function showAllProjects() {
-    const checkedTechnologiesButtons = document.querySelectorAll(selectors.INPUT_CHECKED);
+    const checkedTechnologiesButtons = document.querySelectorAll(`${tags.INPUT}[type="checkbox"]:checked`);
     checkedTechnologiesButtons.forEach((el) => {
         el.checked = false;
     } );
     refreshFilteredProjects();
 }
 
-function init() {
-    const languageButtonElement = document.querySelector(selectors.LANGUAGE_BTN);
-    const technologiesIconsContainerElement = document.querySelector(selectors.ICONS_CONTAINER);
-    const allTechnologiesButtonElement = document.querySelector(selectors.ALL_TECHNOLOGIES_BTN);
+function setUpListeners() {
+    const languageButtonElement = document.querySelector(`.${classes.LANGUAGE_BTN}`);
+    const technologiesIconsContainerElement = document.querySelector(`.${classes.ICONS_CONTAINER}`);
+    const allTechnologiesButtonElement = document.querySelector(`#${id.ALL_TECHNOLOGIES_BTN}`);
 
+    languageButtonElement.addEventListener('input', translateContent);
+    technologiesIconsContainerElement.addEventListener('input', refreshFilteredProjects);
+    allTechnologiesButtonElement.addEventListener('click', showAllProjects);
+}
+
+function init() {
     initTechnologiesMap();
     initProjectsSet();
     AOS.init();
     anime({
-        targets: selectors.ICON_BOX,
+        targets: `.${classes.ICON_BOX}`,
         rotate: '2turn',
         duration: 1500
     });
-    languageButtonElement.addEventListener('input', translateContent);
-    technologiesIconsContainerElement.addEventListener('input', refreshFilteredProjects);
-    allTechnologiesButtonElement.addEventListener('click', showAllProjects);
+    setUpListeners();
 }
 
 init();
